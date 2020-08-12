@@ -6,8 +6,6 @@ import styles from './album-card.css'
 export const AlbumCard = ({ album }) => {
     const imageInfo = album?.image.find((img) => img.size === 'large')
 
-    console.log(album)
-
     return (
         <div className={styles.albumCardContainer}>
             <img src={imageInfo['#text']}/>

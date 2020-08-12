@@ -11,7 +11,7 @@ import styles from './home.css'
 
 const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => {
 
-    const [isShowAllAlbums, setShowAlbums] = useState(true)
+    const [isShowAllAlbums, setShowAlbums] = useState(false)
 
     const handleOnSubmit = useCallback(() => {
 
