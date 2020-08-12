@@ -1,3 +1,5 @@
 export { Layout } from './layout'
 export { Loader } from './loader'
 export { SearchBar } from './search-bar'
+export { Library } from './library'
+export { AlbumCard } from './album-card'

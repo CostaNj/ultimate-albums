@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import * as selectors from '../../__data__/selectors/search'
 import { searchAction } from '../../__data__/actions'
 
-import { SearchBar } from '../../components'
+import { Library, SearchBar } from '../../components'
 
 import styles from './home.css'
 
@@ -65,7 +65,7 @@ const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => 
                     <span>My albums</span>
                 </button>
             </div>
-
+            <Library albums={autocompleteData}/>
         </div>
     )
 }

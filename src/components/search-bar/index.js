@@ -58,7 +58,7 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
                             <div className={styles.searchForm}>
                                 <input
                                     className={styles.searchInput}
-                                    placeholder="Enter release name"
+                                    placeholder="Enter album title"
                                     size="4"
                                     autoComplete="off"
                                     autoCorrect="off"
@@ -92,13 +92,12 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
                                                     className={styles.autocompleteItem}
                                                 >
                                                     <img src={imageInfo['#text']}/>
-                                                    <span>{`${releaseInfo?.name} - ${releaseInfo?.artist}: ${releaseInfo?.mbid}`}</span>
+                                                    <span>{`${releaseInfo?.name} - ${releaseInfo?.artist}`}</span>
                                                 </button>
                                         )})
                                     }
                                 </div>
                             }
-
                         </form>
                     )
                 }
