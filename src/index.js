@@ -5,10 +5,13 @@ import './reset.css'
 
 import { store } from './__data__/store'
 import { Router } from './router'
+import { Layout } from '../src/components'
 
 const App = () => (
     <Provider store={store}>
-        <Router/>
+        <Layout>
+            <Router/>
+        </Layout>
     </Provider>
 )
 
