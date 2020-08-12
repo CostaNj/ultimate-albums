@@ -14,8 +14,8 @@
     min-height: 36px;
     height: 36px;
     border: 1px solid#606060;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     padding: 9px 12px;
     vertical-align: top;
     font-family: inherit;
@@ -37,8 +37,8 @@
 }
 
 .search-btn {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
     border: 1px solid#606060;
     padding: 9px 12px;
     vertical-align: top;
@@ -60,13 +60,13 @@
 .autocomplete-container {
     position: absolute;
     top: 35px;
-    left: 0;
+    left: 8px;
     padding: 12px;
     background: #111;
     z-index: 1;
     border: 1px solid #606060;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -89,5 +89,7 @@
 }
 
 .autocomplete-item:not(:last-child) {
-   margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(60,60,60,0.5);
+    margin-bottom: 10px;
 }

@@ -1,4 +1,26 @@
-.main-container {
-    height: 100vh;
-    margin-top: 50px;
+.main {
+    width: 100%;
+
+}
+
+.container {
+    margin: 50px auto 0;
+}
+
+@media (min-width: 1056px) {
+    .container {
+        max-width: 1056px;
+    }
+}
+
+@media (min-width: 732px) and (max-width: 1055.98px) {
+    .container {
+        max-width: 732px;
+    }
+}
+
+@media (max-width: 731.98px) {
+    .container {
+        max-width: 414px;
+    }
 }

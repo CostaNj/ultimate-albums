@@ -23,15 +23,13 @@ const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => 
 
     return (
         <>
-            <div className={styles.searchBarContainer}>
-                <SearchBar
-                    searchLine={searchLine}
-                    onChange={handleChangeSearch}
-                    onSubmit={handleOnSubmit}
-                    autocompleteData={autocompleteData}
-                    onClickAlbum={handleOnClickAlbum}
-                />
-            </div>
+            <SearchBar
+                searchLine={searchLine}
+                onChange={handleChangeSearch}
+                onSubmit={handleOnSubmit}
+                autocompleteData={autocompleteData}
+                onClickAlbum={handleOnClickAlbum}
+            />
             <h1>Home</h1>
             <p>{searchLine}</p>
 
