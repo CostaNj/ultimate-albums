@@ -1,4 +1,4 @@
-export const baseUrl = 'https://musicbrainz.org/ws/2'
+export const baseUrl = 'http://ws.audioscrobbler.com/2.0/?api_key=57ee3318536b23ee81d6b27e36997cde&format=json'
 
 // action types
 export const SEARCH_LOADING = 'SEARCH_LOADING'

@@ -1,7 +1,7 @@
 import { baseUrl, SEARCH_FAILED, SEARCH_LOADING, SEARCH_SUCCESS } from '../constants'
 import axios from 'axios'
 
-export const searchAction = (query, limit, offset) => (dispatch) => {
+export const searchAction = (query, limit, page ) => (dispatch) => {
 
     dispatch({
         type: SEARCH_LOADING,
@@ -12,7 +12,7 @@ export const searchAction = (query, limit, offset) => (dispatch) => {
 
     axios({
         method: 'GET',
-        url: `${baseUrl}/release/?fmt=json&query=${query}${limit ? `&limit=${limit}` : ''}${offset ? `&limit=${offset}` : ''}`,
+        url: `${baseUrl}&method=album.search&album=${query}${limit ? `&limit=${limit}` : ''}${page  ? `&limit=${page }` : ''}`,
         headers: {
             'Content-Type': 'application/json'
         }
@@ -23,7 +23,7 @@ export const searchAction = (query, limit, offset) => (dispatch) => {
                     dispatch({
                         type: SEARCH_SUCCESS,
                         payload: {
-                            autocompleteData: response?.data?.releases
+                            autocompleteData: response?.data?.results?.albummatches?.album.filter((album) => album?.mbid)
                         }
                     })
                 }
