@@ -1,3 +1,3 @@
-export { Home } from './home'
-export { Album } from './album'
-export { ErrorPage } from './404'
+export { default as Home } from './home'
+export { default as Album } from './album'
+export { default as ErrorPage } from './404'

@@ -1,8 +1,8 @@
 import React from 'react'
 import { parse } from 'query-string'
-import {Redirect} from "react-router-dom";
+import { Redirect } from 'react-router-dom'
 
-export const Album = ({ location }) => {
+const Album = ({ location }) => {
 
     const query = parse(location?.search)
 
@@ -14,3 +14,5 @@ export const Album = ({ location }) => {
         <div>{`Album: ${query?.id}`}</div>
     )
 }
+
+export default Album

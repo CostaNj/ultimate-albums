@@ -1,3 +1,5 @@
 import React from 'react'
 
-export const ErrorPage = () => <div>404</div>
+const ErrorPage = () => <div>404</div>
+
+export default ErrorPage
