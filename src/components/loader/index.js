@@ -6,7 +6,7 @@ import styles from './loader.css'
 export const Loader = () => (
     <div className={styles.loaderContainer}>
         <ScaleLoader
-            color={'rgba(0,0,0, 0.7)'}
+            color={'rgba(0,0,0, 0.9)'}
             loading
             width={10}
         />

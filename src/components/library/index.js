@@ -3,12 +3,14 @@ import { AlbumCard } from '../'
 
 import styles from './library.css'
 
-export const Library = ({ albums }) => (
+const Library = ({ albums }) => (
     <section>
         <div className={styles.libraryContainer}>
             {
-                albums.map((album) => <AlbumCard album={album}/>)
+                albums.map((album) => <AlbumCard key={album?.mbid} album={album}/>)
             }
         </div>
     </section>
 )
+
+export default Library

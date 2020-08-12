@@ -1,5 +1,8 @@
 .home-container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .btn-container {
@@ -13,7 +16,7 @@
     border: 1px solid #606060;
     padding: 9px 12px;
     vertical-align: top;
-    font-family: inherit;
+    font-family: "Roboto Light", sans-serif;
     color: #ddc;
     box-shadow: none;
     font-size: 14px;
@@ -49,4 +52,19 @@
 .library-btn-right {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
+}
+
+.album-gallery {
+    margin: 0 auto;
+}
+
+.album-gallery h1 {
+    text-align: center;
+    font-family: "Roboto Light", sans-serif;
+    color: #222;
+    box-shadow: none;
+    font-size: 32px;
+    line-height: 16px;
+    font-weight: 600;
+    margin-bottom: 32px;
 }

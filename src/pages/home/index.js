@@ -1,20 +1,23 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, lazy, Suspense } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { createStructuredSelector } from 'reselect'
-import * as selectors from '../../__data__/selectors/search'
+import * as searchSelectors from '../../__data__/selectors/search'
+import * as librarySelectors from '../../__data__/selectors/library'
 import { searchAction } from '../../__data__/actions'
 
-import { Library, SearchBar } from '../../components'
+import {Loader, SearchBar} from '../../components'
+
+const Library = lazy(() => import('../../components/library'));
 
 import styles from './home.css'
 
-const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => {
+const Home = ({ searchLine, autocompleteData, handleChangeSearch, history, myAlbums }) => {
 
     const [isShowAllAlbums, setShowAlbums] = useState(false)
 
     const handleOnSubmit = useCallback(() => {
-
+        setShowAlbums(true)
     }, [searchLine])
 
     const handleOnClickAlbum = useCallback((id) => {
@@ -28,6 +31,8 @@ const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => 
     const handleMyAlbums = useCallback(() => {
         setShowAlbums(false)
     }, [searchLine, isShowAllAlbums])
+
+    const albumsData = isShowAllAlbums ? autocompleteData : myAlbums
 
     return (
         <div className={styles.homeContainer}>
@@ -50,7 +55,7 @@ const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => 
                     }
                     onClick={handleAllAlbumsClick}
                 >
-                    <span>All albums</span>
+                    <span>Found albums</span>
                 </button>
                 <button
                     className={
@@ -65,14 +70,27 @@ const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => 
                     <span>My albums</span>
                 </button>
             </div>
-            <Library albums={autocompleteData}/>
+            {
+                <Suspense fallback={<Loader/>}>
+                    <div className={styles.albumGallery}>
+                        {
+                            albumsData.length === 0 ? <h2>Not found</h2> :
+                                <>
+                                    <h1>{isShowAllAlbums ? 'Found albums' : 'My albums'}</h1>
+                                    <Library albums={albumsData}/>
+                                </>
+                        }
+                    </div>
+                </Suspense>
+            }
         </div>
     )
 }
 
 const mapStateToProps = () => createStructuredSelector({
-    searchLine: selectors.getSearchLine,
-    autocompleteData: selectors.getAutocompleteData
+    searchLine: searchSelectors.getSearchLine,
+    autocompleteData: searchSelectors.getAutocompleteData,
+    myAlbums: librarySelectors.getLibrary
 })
 
 const mapDispatchToProps = (dispatch) => {
