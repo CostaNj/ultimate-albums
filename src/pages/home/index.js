@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import * as selectors from '../../__data__/selectors/search'
@@ -8,23 +8,46 @@ import { SearchBar } from '../../components'
 
 import styles from './home.css'
 
-const Home = ({ dispatch, searchData }) => {
+const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => {
     useEffect(() => {
-        dispatch(searchAction())
+
     }, [])
+
+    const handleOnSubmit = useCallback(() => {
+
+    }, [searchLine])
+
+    const handleOnClickAlbum = useCallback((id) => {
+        history.push(`/album?id=${id}`)
+    }, [searchLine])
+
     return (
         <>
             <div className={styles.searchBarContainer}>
-                <SearchBar/>
+                <SearchBar
+                    searchLine={searchLine}
+                    onChange={handleChangeSearch}
+                    onSubmit={handleOnSubmit}
+                    autocompleteData={autocompleteData}
+                    onClickAlbum={handleOnClickAlbum}
+                />
             </div>
-            <p>Home</p>
-            {searchData?.title}
+            <h1>Home</h1>
+            <p>{searchLine}</p>
+
         </>
     )
 }
 
 const mapStateToProps = () => createStructuredSelector({
-    searchData: selectors.getSearchData
+    searchLine: selectors.getSearchLine,
+    autocompleteData: selectors.getAutocompleteData
 })
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleChangeSearch: (searchLine) => dispatch(searchAction(searchLine, 10))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
