@@ -1,4 +1,52 @@
-.search-bar-container {
-    width: 80%;
-    margin: 0 auto;
+.home-container {
+    width: 100%;
+}
+
+.btn-container {
+    width: 100%;
+    margin-bottom: 64px;
+    display: flex;
+    justify-content: center;
+}
+
+.library-btn {
+    border: 1px solid #606060;
+    padding: 9px 12px;
+    vertical-align: top;
+    font-family: inherit;
+    color: #ddc;
+    box-shadow: none;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 600;
+    background: #111;
+    cursor: pointer;
+}
+
+.library-btn:hover {
+    opacity: 0.9;
+}
+
+.library-btn-active {
+    opacity: 0.7;
+    cursor: auto;
+}
+
+.library-btn-active:hover {
+    opacity: 0.7;
+}
+
+.library-btn:focus {
+    border-color: #7a7a7a;
+    outline: none;
+}
+
+.library-btn-left {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.library-btn-right {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }

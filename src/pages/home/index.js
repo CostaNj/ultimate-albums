@@ -1,5 +1,6 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
 import { createStructuredSelector } from 'reselect'
 import * as selectors from '../../__data__/selectors/search'
 import { searchAction } from '../../__data__/actions'
@@ -9,9 +10,8 @@ import { SearchBar } from '../../components'
 import styles from './home.css'
 
 const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => {
-    useEffect(() => {
 
-    }, [])
+    const [isShowAllAlbums, setShowAlbums] = useState(true)
 
     const handleOnSubmit = useCallback(() => {
 
@@ -21,8 +21,16 @@ const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => 
         history.push(`/album?id=${id}`)
     }, [searchLine])
 
+    const handleAllAlbumsClick = useCallback(() => {
+        setShowAlbums(true)
+    }, [searchLine, isShowAllAlbums])
+
+    const handleMyAlbums = useCallback(() => {
+        setShowAlbums(false)
+    }, [searchLine, isShowAllAlbums])
+
     return (
-        <>
+        <div className={styles.homeContainer}>
             <SearchBar
                 searchLine={searchLine}
                 onChange={handleChangeSearch}
@@ -30,10 +38,35 @@ const Home = ({ searchLine, autocompleteData, handleChangeSearch, history }) => 
                 autocompleteData={autocompleteData}
                 onClickAlbum={handleOnClickAlbum}
             />
-            <h1>Home</h1>
-            <p>{searchLine}</p>
 
-        </>
+            <div className={styles.btnContainer}>
+                <button
+                    className={
+                        classnames(
+                            styles.libraryBtn,
+                            styles.libraryBtnLeft,
+                            isShowAllAlbums && styles.libraryBtnActive
+                        )
+                    }
+                    onClick={handleAllAlbumsClick}
+                >
+                    <span>All albums</span>
+                </button>
+                <button
+                    className={
+                        classnames(
+                            styles.libraryBtn,
+                            styles.libraryBtnRight,
+                            !isShowAllAlbums && styles.libraryBtnActive
+                        )
+                    }
+                    onClick={handleMyAlbums}
+                >
+                    <span>My albums</span>
+                </button>
+            </div>
+
+        </div>
     )
 }
 
