@@ -1,12 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
 import './reset.css'
 
-import styles from './styles.css'
+import { Router } from './router'
 
-const App = () => {
-    return <div className={styles.main}>Albums!</div>
-}
+const App = () => <Router/>
 
 ReactDOM.render(<App />, document.querySelector('#root'))
