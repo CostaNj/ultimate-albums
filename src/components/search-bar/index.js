@@ -9,10 +9,9 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
     const [isFocused, setFocus] = useState(false)
 
     const handleSubmit = useCallback((values, actions) => {
-        setFocus(true)
-        onSubmit()
+        setFocus(false)
+        onSubmit(values.search, searchLine)
         actions.setSubmitting(false)
-        actions.resetForm()
     }, [])
 
     const handleRules = useCallback((values) => {
