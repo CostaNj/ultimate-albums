@@ -1,13 +1,18 @@
 import { SAVE_ALBUM, DELETE_ALBUM } from '../constants'
-
-const initialState = []
+import { saveState, loadState } from '../../utils/local-storage'
+const persistedLibrary = loadState()
+const initialState = persistedLibrary || []
 
 export const library = (state = initialState, action) => {
     switch (action.type) {
         case SAVE_ALBUM:
-            return [...state, action.payload ]
+            const increasedLibrary = [...state, action.payload ]
+            saveState(increasedLibrary)
+            return increasedLibrary
         case DELETE_ALBUM:
-            return [...state.filter(album => album?.url.replace('https://www.last.fm/music/', '') !== action.payload?.url.replace('https://www.last.fm/music/', ''))]
+            const reducedLibrary = [...state.filter(album => album?.url.replace('https://www.last.fm/music/', '') !== action.payload?.url.replace('https://www.last.fm/music/', ''))]
+            saveState(reducedLibrary)
+            return reducedLibrary
         default:
             return state
     }
