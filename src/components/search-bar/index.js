@@ -7,16 +7,22 @@ import styles from './search-bar.css'
 export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, onClickAlbum }) => {
 
     const [isFocused, setFocus] = useState(false)
+    const [isDisabled, setDisabled] = useState(false)
 
     const handleSubmit = useCallback((values, actions) => {
         setFocus(false)
-        onSubmit(values.search, searchLine)
-        actions.setSubmitting(false)
+        console.log(values.search)
+        if(!isDisabled && values.search) {
+            onSubmit(values.search, searchLine)
+            setDisabled(true)
+        }
+
     }, [])
 
     const handleRules = useCallback((values) => {
         let errors = {}
         setFocus(true)
+        setDisabled(false)
         onChange(values.search)
 
         if(!values.search) {
@@ -33,7 +39,6 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
     const handleFocus = useCallback(() => {
         setFocus(true)
     }, [searchLine])
-
 
     const handleClickAlbum = useCallback((id) => () => {
         console.log(id)
@@ -73,7 +78,7 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
                                 />
                                 <button
                                     type="submit"
-                                    disabled={isSubmitting}
+                                    disabled={isDisabled}
                                     className={styles.searchBtn}>
                                     <span>Search</span>
                                 </button>
