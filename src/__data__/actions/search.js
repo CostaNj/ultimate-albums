@@ -32,7 +32,7 @@ export const searchAction = (query, limit, page) => (dispatch) => {
                         dispatch({
                             type: page === 1 ? SEARCH_SUCCESS : ADD_NEW_DATA_SEARCH,
                             payload: {
-                                foundAlbums: response?.data?.results?.albummatches?.album.filter((album) => album?.mbid),
+                                foundAlbums: response?.data?.results?.albummatches?.album.filter((album) => album?.url.replace('https://www.last.fm/music/', '')),
                                 pages: response?.data?.results['opensearch:totalResults'] / response?.data?.results['opensearch:itemsPerPage']
                             }
                         })
@@ -40,7 +40,7 @@ export const searchAction = (query, limit, page) => (dispatch) => {
                         dispatch({
                             type: AUTOCOMPLETE_SEARCH_SUCCESS,
                             payload: {
-                                autocompleteData: response?.data?.results?.albummatches?.album.filter((album) => album?.mbid)
+                                autocompleteData: response?.data?.results?.albummatches?.album.filter((album) => album?.url.replace('https://www.last.fm/music/', ''))
                             }
                         })
                     }

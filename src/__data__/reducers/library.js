@@ -7,7 +7,7 @@ export const library = (state = initialState, action) => {
         case SAVE_ALBUM:
             return [...state, action.payload ]
         case DELETE_ALBUM:
-            return [...state.filter(album => album?.mbid !== action.payload?.mbid)]
+            return [...state.filter(album => album?.url.replace('https://www.last.fm/music/', '') !== action.payload?.url.replace('https://www.last.fm/music/', ''))]
         default:
             return state
     }

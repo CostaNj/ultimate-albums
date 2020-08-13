@@ -7,7 +7,7 @@ const Library = ({ albums }) => (
     <section>
         <div className={styles.libraryContainer}>
             {
-                albums.map((album) => <AlbumCard key={album?.mbid} album={album}/>)
+                albums.map((album) => <AlbumCard key={album?.url.replace('https://www.last.fm/music/', '')} album={album}/>)
             }
         </div>
     </section>

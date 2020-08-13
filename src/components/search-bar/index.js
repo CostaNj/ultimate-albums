@@ -91,8 +91,8 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
                                             const imageInfo = releaseInfo?.image.find((img) => img.size === 'small')
                                             return (
                                                 <button
-                                                    onMouseDown={handleClickAlbum(releaseInfo?.mbid)}
-                                                    key={releaseInfo?.mbid}
+                                                    onMouseDown={handleClickAlbum(releaseInfo?.url.replace('https://www.last.fm/music/', ''))}
+                                                    key={releaseInfo?.url.replace('https://www.last.fm/music/', '')}
                                                     className={styles.autocompleteItem}
                                                 >
                                                     <img src={imageInfo['#text']}/>
