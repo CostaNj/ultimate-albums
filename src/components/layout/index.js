@@ -27,7 +27,7 @@ export const Layout = ({ children }) => {
                             transition: 'all linear 2s'
                         }}
                     >
-                        <a href="https://www.ultimate-guitar.com">
+                        <a href="/">
                             <svg width="80" height="80" viewBox="0 0 80 80" className="HmV5v _8Fvw9">
                                 <path
                                     transform="scale(2)"

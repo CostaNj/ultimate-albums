@@ -36,8 +36,8 @@ const Home = ({ searchLine, autocompleteData, foundAlbums, handleChangeSearch, h
         handleSubmitSearch(searchLine, loadedPages + 1)
     }, [searchLine, loadedPages, pages])
 
-    const handleOnClickAlbum = useCallback((id) => {
-        history.push(`/album?id=${id}`)
+    const handleOnClickAlbum = useCallback((name, artist) => {
+        history.push(`/album?name=${name}&artist=${artist}`)
     }, [searchLine])
 
     const handleAllAlbumsClick = useCallback(() => {

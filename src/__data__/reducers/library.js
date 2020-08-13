@@ -10,7 +10,7 @@ export const library = (state = initialState, action) => {
             saveState(increasedLibrary)
             return increasedLibrary
         case DELETE_ALBUM:
-            const reducedLibrary = [...state.filter(album => album?.url.replace('https://www.last.fm/music/', '') !== action.payload?.url.replace('https://www.last.fm/music/', ''))]
+            const reducedLibrary = [...state.filter(album => album?.url !== action.payload?.url)]
             saveState(reducedLibrary)
             return reducedLibrary
         default:

@@ -11,7 +11,6 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
 
     const handleSubmit = useCallback((values, actions) => {
         setFocus(false)
-        console.log(values.search)
         if(!isDisabled && values.search) {
             onSubmit(values.search, searchLine)
             setDisabled(true)
@@ -40,9 +39,8 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
         setFocus(true)
     }, [searchLine])
 
-    const handleClickAlbum = useCallback((id) => () => {
-        console.log(id)
-        onClickAlbum(id)
+    const handleClickAlbum = useCallback((name, artist) => () => {
+        onClickAlbum(name, artist)
     }, [searchLine])
 
     return (
@@ -91,8 +89,8 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
                                             const imageInfo = releaseInfo?.image.find((img) => img.size === 'small')
                                             return (
                                                 <button
-                                                    onMouseDown={handleClickAlbum(releaseInfo?.url.replace('https://www.last.fm/music/', ''))}
-                                                    key={releaseInfo?.url.replace('https://www.last.fm/music/', '')}
+                                                    onMouseDown={handleClickAlbum(releaseInfo?.name, releaseInfo?.artist)}
+                                                    key={releaseInfo?.url}
                                                     className={styles.autocompleteItem}
                                                 >
                                                     <img src={imageInfo['#text']}/>

@@ -11,14 +11,14 @@ import * as selectors from '../../__data__/selectors/library'
 
 const AlbumCard = ({ album, myAlbums, saveIntoLibrary, deleteFromLibrary, history }) => {
     const imageInfo = album?.image.find((img) => img.size === 'large')
-    const isMyAlbum = myAlbums.find(currentAlbum => currentAlbum?.url.replace('https://www.last.fm/music/', '') === album?.url.replace('https://www.last.fm/music/', ''))
+    const isMyAlbum = myAlbums.find(currentAlbum => currentAlbum?.url === album?.url)
 
     const handleClickCardAction = useCallback(() => {
         isMyAlbum ? deleteFromLibrary(album) : saveIntoLibrary(album)
     }, [album, isMyAlbum ])
 
     const handleClickShowInfo = useCallback(() => {
-        history.push(`/album?id=${album?.url.replace('https://www.last.fm/music/', '')}`)
+        history.push(`/album?name=${album?.name}&artist=${album?.artist}`)
     }, [album, isMyAlbum ])
 
     return (

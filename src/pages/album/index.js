@@ -1,18 +1,67 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { parse } from 'query-string'
-import { Redirect } from 'react-router-dom'
+import {Redirect } from 'react-router-dom'
+import {createStructuredSelector} from 'reselect'
+import * as selectors from '../../__data__/selectors/album'
+import { getAlbumInfoAction } from '../../__data__/actions'
+import {connect} from 'react-redux';
 
-const Album = ({ location }) => {
+import { Loader } from '../../components'
+
+import styles from './album.css'
+
+const Album = ({ location, history, getAlbumInfo, isLoading, wiki, tracks, albumInfo, image }) => {
 
     const query = parse(location?.search)
-
-    if(!query?.id) {
+    console.log(albumInfo)
+    if(!query?.name || !query?.artist) {
         return <Redirect to="/error"/>
     }
 
+    useEffect(() => {
+        getAlbumInfo(query?.name, query?.artist)
+    }, [])
+
+    const handleOnClick = useCallback(() => {
+        history.push('/')
+    }, [])
+
+    if(isLoading) {
+        return <Loader/>
+    }
+    const imageInfo = image && image.find((img) => img.size === 'mega')
+
     return (
-        <div>{`Album: ${query?.id}`}</div>
+        <div className={styles.albumContainer}>
+            <img src={imageInfo && imageInfo['#text']}/>
+            <br/>
+            <p>{`Album: ${query?.name}`}</p>
+            <p>{`Artist: ${query?.artist}`}</p>
+            <br/>
+            <button onClick={handleOnClick}>Back</button>
+            <br/>
+            {wiki?.content}
+            <br/>
+            <br/>
+            <p>Tracks:</p>
+            <br/>
+            {
+                tracks && tracks.map((track)=> <div key={track.name}>{track.name}</div>)
+            }
+        </div>
     )
 }
 
-export default Album
+const mapStateToProps = () => createStructuredSelector({
+    albumInfo: selectors.getAlbumInfo,
+    isLoading: selectors.getLoadingStatus,
+    wiki: selectors.getWiki,
+    tracks: selectors.getTracks,
+    image: selectors.getImage
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    getAlbumInfo: (name, artist) => dispatch(getAlbumInfoAction(name, artist)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Album)
