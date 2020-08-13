@@ -12,13 +12,14 @@ import axios from 'axios'
 
 export const searchAction = (query, limit, page) => (dispatch) => {
 
+    dispatch({
+        type: page ? SEARCH_LOADING : AUTOCOMPLETE_SEARCH_LOADING,
+        payload: {
+            searchLine: query
+        }
+    })
+
     if (query) {
-        dispatch({
-            type: page ? SEARCH_LOADING : AUTOCOMPLETE_SEARCH_LOADING,
-            payload: {
-                searchLine: query
-            }
-        })
 
         axios({
             method: 'GET',
