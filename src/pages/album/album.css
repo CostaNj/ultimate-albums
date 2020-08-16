@@ -22,11 +22,10 @@
     text-align: center;
 }
 
-.album-image-container {
-    margin-bottom: 24px;
-}
-
-.album-btn-container {
+.album-image-container,
+.album-btn-container,
+.album-wiki-container,
+.album-tracks-container {
     margin-bottom: 24px;
 }
 
@@ -39,8 +38,4 @@
 
 .album-btn-container button:hover {
     opacity: 0.9;
-}
-
-.album-tracks-container {
-    margin-bottom: 24px;
 }

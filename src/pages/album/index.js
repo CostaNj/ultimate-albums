@@ -42,7 +42,9 @@ const Album = ({ location, history, getAlbumInfo, isLoading, wiki, tracks, album
             <div className={styles.albumBtnContainer}>
                 <button onClick={handleOnClick}>Back to my library</button>
             </div>
-            <p>{wiki?.content}</p>
+            <div className={styles.albumWikiContainer}>
+                {wiki?.content}
+            </div>
             <div className={styles.albumTracksContainer}>
                 <p>Tracks:</p>
             </div>
