@@ -20,7 +20,6 @@ export const searchAction = (query, limit, page) => (dispatch) => {
     })
 
     if (query) {
-
         axios({
             method: 'GET',
             url: `${baseUrl}&method=album.search&album=${query}${limit ? `&limit=${limit}` : ''}${page ? `&page=${page}` : ''}`,
@@ -34,7 +33,9 @@ export const searchAction = (query, limit, page) => (dispatch) => {
                         dispatch({
                             type: page === 1 ? SEARCH_SUCCESS : ADD_NEW_DATA_SEARCH,
                             payload: {
-                                foundAlbums: response?.data?.results?.albummatches?.album.filter((album) => album?.url),
+                                foundAlbums: response?.data?.results?.albummatches?.album.filter(
+                                    (album) => album.url && album.name && album.artist && album.image
+                                ),
                                 pages: response?.data?.results['opensearch:totalResults'] / response?.data?.results['opensearch:itemsPerPage']
                             }
                         })
@@ -42,7 +43,9 @@ export const searchAction = (query, limit, page) => (dispatch) => {
                         dispatch({
                             type: AUTOCOMPLETE_SEARCH_SUCCESS,
                             payload: {
-                                autocompleteData: response?.data?.results?.albummatches?.album.filter((album) => album?.url)
+                                autocompleteData: response?.data?.results?.albummatches?.album.filter(
+                                    (album) => album.url && album.name && album.artist && album.image
+                                )
                             }
                         })
                     }

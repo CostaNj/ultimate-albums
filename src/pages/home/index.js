@@ -67,12 +67,12 @@ const Home = (props) => {
     }, [myAlbums])
 
     const handleClickShowInfo = useCallback((album) => {
-        history.push(`/album?name=${album?.name}&artist=${album?.artist}`)
+        history.push(`/album?name=${album.name}&artist=${album.artist}`)
     }, [myAlbums])
 
-    const myAlbumsUrls = myAlbums.map(album => album?.url)
+    const myAlbumsUrls = myAlbums.map(album => album.url)
     const albumsData = isShowAllAlbums ?
-        foundAlbums.map(currentAlbum => ({...currentAlbum, isMyLibraryAlbum: myAlbumsUrls.includes(currentAlbum?.url)  })) :
+        foundAlbums.map(currentAlbum => ({...currentAlbum, isMyLibraryAlbum: myAlbumsUrls.includes(currentAlbum.url) })) :
         myAlbums.map(currentAlbum => ({...currentAlbum, isMyLibraryAlbum: true}))
 
     return (

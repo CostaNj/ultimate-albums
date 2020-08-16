@@ -85,16 +85,16 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
                                 isFocused && searchLine && autocompleteData.length > 0 &&
                                 <div className={styles.autocompleteContainer}>
                                     {
-                                        autocompleteData.map(releaseInfo => {
-                                            const imageInfo = releaseInfo?.image.find((img) => img.size === 'small')
+                                        autocompleteData.map(album => {
+                                            const imageInfo = album.image.find((img) => img.size === 'small')
                                             return (
                                                 <button
-                                                    onMouseDown={handleClickAlbum(releaseInfo?.name, releaseInfo?.artist)}
-                                                    key={releaseInfo?.url}
+                                                    onMouseDown={handleClickAlbum(album.name, album.artist)}
+                                                    key={album.url}
                                                     className={styles.autocompleteItem}
                                                 >
                                                     <img src={imageInfo['#text']}/>
-                                                    <span>{`${releaseInfo?.name} - ${releaseInfo?.artist}`}</span>
+                                                    <span>{`${album.name} - ${album.artist}`}</span>
                                                 </button>
                                         )})
                                     }

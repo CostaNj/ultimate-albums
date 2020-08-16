@@ -9,7 +9,7 @@ export const Library = ({ albums, onClickShowInfo, onClickLibraryAction }) => (
             {
                 albums.map((album) =>
                     <AlbumCard
-                        key={album?.url}
+                        key={album.url}
                         album={album}
                         onClickShowInfo={onClickShowInfo}
                         onClickLibraryAction={onClickLibraryAction}

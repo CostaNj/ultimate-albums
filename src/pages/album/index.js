@@ -36,14 +36,14 @@ const Album = ({ location, history, getAlbumInfo, isLoading, wiki, tracks, album
                 <img src={imageInfo && imageInfo['#text']}/>
             </div>
             <div className={styles.albumTitleContainer}>
-                <h2>{`Album: ${query?.name}`}</h2>
-                <h3>{`Artist: ${query?.artist}`}</h3>
+                <h2>{`Album: ${query.name}`}</h2>
+                <h3>{`Artist: ${query.artist}`}</h3>
             </div>
             <div className={styles.albumBtnContainer}>
                 <button onClick={handleOnClick}>Back to my library</button>
             </div>
             <div className={styles.albumWikiContainer}>
-                {wiki?.content}
+                {wiki.content}
             </div>
             <div className={styles.albumTracksContainer}>
                 <p>Tracks:</p>
