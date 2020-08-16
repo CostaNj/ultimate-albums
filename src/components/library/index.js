@@ -3,11 +3,17 @@ import { AlbumCard } from '../'
 
 import styles from './library.css'
 
-const Library = ({ albums }) => (
+export const Library = ({ albums, onClickShowInfo, onClickLibraryAction }) => (
     <section>
         <div className={styles.libraryContainer}>
             {
-                albums.map((album) => <AlbumCard key={album?.url} album={album}/>)
+                albums.map((album) =>
+                    <AlbumCard
+                        key={album?.url}
+                        album={album}
+                        onClickShowInfo={onClickShowInfo}
+                        onClickLibraryAction={onClickLibraryAction}
+                    />)
             }
         </div>
     </section>

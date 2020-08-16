@@ -4,16 +4,30 @@ import classnames from 'classnames'
 import { createStructuredSelector } from 'reselect'
 import * as searchSelectors from '../../__data__/selectors/search'
 import * as librarySelectors from '../../__data__/selectors/library'
-import { searchAction } from '../../__data__/actions'
+import { deleteAlbum, saveAlbum, searchAction } from '../../__data__/actions'
 
-import {Loader, SearchBar} from '../../components'
+import { Loader, SearchBar } from '../../components'
 import { useEventListener } from '../../utils/event-hook'
 
 const Library = lazy(() => import('../../components/library'));
 
 import styles from './home.css'
 
-const Home = ({ searchLine, autocompleteData, foundAlbums, handleChangeSearch, handleSubmitSearch, history, myAlbums, pages, loadedPages }) => {
+const Home = (props) => {
+
+    const {
+        searchLine,
+        autocompleteData,
+        foundAlbums,
+        handleChangeSearch,
+        handleSubmitSearch,
+        history,
+        myAlbums,
+        pages,
+        loadedPages,
+        saveIntoLibrary,
+        deleteFromLibrary
+    } = props
 
     const [isShowAllAlbums, setShowAlbums] = useState(false)
 
@@ -48,7 +62,18 @@ const Home = ({ searchLine, autocompleteData, foundAlbums, handleChangeSearch, h
         setShowAlbums(false)
     }, [searchLine, isShowAllAlbums])
 
-    const albumsData = isShowAllAlbums ? foundAlbums : myAlbums
+    const handleClickLibraryAction = useCallback((album) => {
+        album?.isMyLibraryAlbum ? deleteFromLibrary(album) : saveIntoLibrary(album)
+    }, [myAlbums])
+
+    const handleClickShowInfo = useCallback((album) => {
+        history.push(`/album?name=${album?.name}&artist=${album?.artist}`)
+    }, [myAlbums])
+
+    const myAlbumsUrls = myAlbums.map(album => album?.url)
+    const albumsData = isShowAllAlbums ?
+        foundAlbums.map(currentAlbum => ({...currentAlbum, isMyLibraryAlbum: myAlbumsUrls.includes(currentAlbum?.url)  })) :
+        myAlbums.map(currentAlbum => ({...currentAlbum, isMyLibraryAlbum: true}))
 
     return (
         <div className={styles.homeContainer}>
@@ -93,7 +118,11 @@ const Home = ({ searchLine, autocompleteData, foundAlbums, handleChangeSearch, h
                             albumsData.length === 0 ? <h2>Not found</h2> :
                                 <>
                                     <h1>{isShowAllAlbums ? 'All found albums' : 'My library'}</h1>
-                                    <Library albums={albumsData}/>
+                                    <Library
+                                        albums={albumsData}
+                                        onClickShowInfo={handleClickShowInfo}
+                                        onClickLibraryAction={handleClickLibraryAction}
+                                    />
                                 </>
                         }
                     </div>
@@ -115,7 +144,9 @@ const mapStateToProps = () => createStructuredSelector({
 const mapDispatchToProps = (dispatch) => {
     return {
         handleChangeSearch: (searchLine) => dispatch(searchAction(searchLine, 10)),
-        handleSubmitSearch: (searchLine, page) => dispatch(searchAction(searchLine, 12, page))
+        handleSubmitSearch: (searchLine, page) => dispatch(searchAction(searchLine, 12, page)),
+        saveIntoLibrary: (album) => dispatch(saveAlbum(album)),
+        deleteFromLibrary: (album) => dispatch(deleteAlbum(album))
     }
 }
 

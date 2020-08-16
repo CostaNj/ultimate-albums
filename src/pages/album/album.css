@@ -16,3 +16,31 @@
 .album-container img{
     border-radius: 8px;
 }
+
+.album-title-container h2, h3 {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.album-image-container {
+    margin-bottom: 24px;
+}
+
+.album-btn-container {
+    margin-bottom: 24px;
+}
+
+.album-btn-container button {
+    border-radius: 8px;
+    cursor: pointer;
+    border: solid 1px black;
+    height: 20px;
+}
+
+.album-btn-container button:hover {
+    opacity: 0.9;
+}
+
+.album-tracks-container {
+    margin-bottom: 24px;
+}

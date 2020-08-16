@@ -13,7 +13,6 @@ import styles from './album.css'
 const Album = ({ location, history, getAlbumInfo, isLoading, wiki, tracks, albumInfo, image }) => {
 
     const query = parse(location?.search)
-    console.log(albumInfo)
     if(!query?.name || !query?.artist) {
         return <Redirect to="/error"/>
     }
@@ -33,18 +32,20 @@ const Album = ({ location, history, getAlbumInfo, isLoading, wiki, tracks, album
 
     return (
         <div className={styles.albumContainer}>
-            <img src={imageInfo && imageInfo['#text']}/>
-            <br/>
-            <p>{`Album: ${query?.name}`}</p>
-            <p>{`Artist: ${query?.artist}`}</p>
-            <br/>
-            <button onClick={handleOnClick}>Back</button>
-            <br/>
-            {wiki?.content}
-            <br/>
-            <br/>
-            <p>Tracks:</p>
-            <br/>
+            <div className={styles.albumImageContainer}>
+                <img src={imageInfo && imageInfo['#text']}/>
+            </div>
+            <div className={styles.albumTitleContainer}>
+                <h2>{`Album: ${query?.name}`}</h2>
+                <h3>{`Artist: ${query?.artist}`}</h3>
+            </div>
+            <div className={styles.albumBtnContainer}>
+                <button onClick={handleOnClick}>Back to my library</button>
+            </div>
+            <p>{wiki?.content}</p>
+            <div className={styles.albumTracksContainer}>
+                <p>Tracks:</p>
+            </div>
             {
                 tracks && tracks.map((track)=> <div key={track.name}>{track.name}</div>)
             }

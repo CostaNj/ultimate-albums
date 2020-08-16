@@ -23,7 +23,6 @@ export const getAlbumInfoAction = (name, artist) => (dispatch) => {
         })
             .then((response) => {
                 if (response?.data) {
-                    console.log(response?.data)
                     dispatch({
                         type: GET_ALBUM_INFO_SUCCESS,
                         payload: {

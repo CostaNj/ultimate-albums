@@ -1,25 +1,18 @@
 import React, { useCallback } from 'react'
 import classnames from 'classnames'
-import { createStructuredSelector } from 'reselect'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
 
 import styles from './album-card.css'
-import { saveAlbum, deleteAlbum } from "../../__data__/actions"
-import * as selectors from '../../__data__/selectors/library'
 
-const AlbumCard = ({ album, myAlbums, saveIntoLibrary, deleteFromLibrary, history }) => {
+export const AlbumCard = ({ album, onClickShowInfo, onClickLibraryAction }) => {
     const imageInfo = album?.image.find((img) => img.size === 'large')
-    const isMyAlbum = myAlbums.find(currentAlbum => currentAlbum?.url === album?.url)
 
     const handleClickCardAction = useCallback(() => {
-        isMyAlbum ? deleteFromLibrary(album) : saveIntoLibrary(album)
-    }, [album, isMyAlbum ])
+        onClickLibraryAction(album)
+    }, [album])
 
     const handleClickShowInfo = useCallback(() => {
-        history.push(`/album?name=${album?.name}&artist=${album?.artist}`)
-    }, [album, isMyAlbum ])
+        onClickShowInfo(album)
+    }, [album])
 
     return (
         <div className={styles.albumCardContainer} >
@@ -31,20 +24,9 @@ const AlbumCard = ({ album, myAlbums, saveIntoLibrary, deleteFromLibrary, histor
                     Show album info
                 </div>
                 <div className={styles.albumCardBtn} onClick={handleClickCardAction}>
-                    { isMyAlbum ? 'Delete from library': 'Save into library'}
+                    { album?.isMyLibraryAlbum ? 'Delete from library': 'Save into library'}
                 </div>
             </div>
         </div>
     )
 }
-
-const mapStateToProps = () => createStructuredSelector({
-    myAlbums: selectors.getLibrary
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    saveIntoLibrary: (album) => dispatch(saveAlbum(album)),
-    deleteFromLibrary: (album) => dispatch(deleteAlbum(album))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AlbumCard))
