@@ -49,7 +49,6 @@ export const SearchBar = ({ searchLine, onChange, autocompleteData, onSubmit, on
                         autoCapitalize="off"
                         required=""
                         type="text"
-                        autoFocus
                         name="search"
                         value={searchLine}
                         onChange={handleChange}
@@ -94,3 +93,5 @@ SearchBar.propTypes = {
     onClickAlbum: PropTypes.func.isRequired,
     autocompleteData: PropTypes.array.isRequired
 }
+
+export default SearchBar

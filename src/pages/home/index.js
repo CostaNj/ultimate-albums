@@ -6,10 +6,11 @@ import * as searchSelectors from '../../__data__/selectors/search'
 import * as librarySelectors from '../../__data__/selectors/library'
 import { deleteAlbum, saveAlbum, searchAction } from '../../__data__/actions'
 
-import { Loader, SearchBar } from '../../components'
+import { Loader } from '../../components'
 import { useEventListener } from '../../utils/event-hook'
 
 const Library = lazy(() => import('../../components/library'));
+const SearchBar = lazy(() => import('../../components/search-bar'));
 
 import styles from './home.css'
 
@@ -77,14 +78,15 @@ const Home = (props) => {
 
     return (
         <div className={styles.homeContainer}>
-            <SearchBar
-                searchLine={searchLine}
-                onChange={handleChangeSearch}
-                onSubmit={handleOnSubmit}
-                autocompleteData={autocompleteData}
-                onClickAlbum={handleOnClickAlbum}
-            />
-
+            <Suspense fallback={<Loader/>}>
+                <SearchBar
+                    searchLine={searchLine}
+                    onChange={handleChangeSearch}
+                    onSubmit={handleOnSubmit}
+                    autocompleteData={autocompleteData}
+                    onClickAlbum={handleOnClickAlbum}
+                />
+            </Suspense>
             <div className={styles.btnContainer}>
                 <button
                     className={

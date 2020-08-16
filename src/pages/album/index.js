@@ -10,7 +10,7 @@ import { Loader } from '../../components'
 
 import styles from './album.css'
 
-const Album = ({ location, history, getAlbumInfo, isLoading, wiki, tracks, albumInfo, image }) => {
+const Album = ({ location, history, getAlbumInfo, isLoading, wiki, tracks, image }) => {
 
     const query = parse(location?.search)
     if(!query?.name || !query?.artist) {
