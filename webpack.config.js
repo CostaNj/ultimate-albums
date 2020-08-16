@@ -1,4 +1,7 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     module: {
@@ -39,9 +42,16 @@ module.exports = {
         historyApiFallback: true,
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
             template: "./public/index.html",
-            filename: "./index.html"
-        })
-    ]
+            filename: "./index.html",
+            minify: true
+        }),
+        new CompressionPlugin(),
+        //new BundleAnalyzerPlugin()
+    ],
+    optimization: {
+        minimize: true,
+    },
 };
