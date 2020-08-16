@@ -41,8 +41,8 @@ const Home = (props) => {
 
     useEventListener('scroll', handler);
 
-    const handleOnSubmit = useCallback((searchLine) => {
-        handleSubmitSearch(searchLine, 1)
+    const handleOnSubmit = useCallback((submittedSearchLine) => {
+        handleSubmitSearch(submittedSearchLine, 1)
         setShowAlbums(true)
     }, [searchLine])
 
